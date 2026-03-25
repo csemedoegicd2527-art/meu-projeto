@@ -1,0 +1,10 @@
+
+#!/bin/bash
+
+ARQUIVO_LOG="data/10000.log"
+total_linhas=$(wc -l < "$ARQUIVO-LOG")
+echo "total linhas: $total_linhas"
+
+
+
+
