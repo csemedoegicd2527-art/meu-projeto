@@ -1,5 +1,32 @@
 #!/bin/bash
+#LOG_FILE="10000.log"
+
+LOG_FILE=$1
+
+
+if [ ! -f "$LOG_FILE" ]; then
+   echo "Ficheiro não existe"
+   exit 1
+fi
+
+echo "ficheiro encontrado"
+
 LOG_FILE="10000.log"
+erros=0
+
+while read line
+do
+
+  if echo "$line" | grep -q "ERROR"
+  then
+    ((erros++))
+  fi
+done < "$LOG_FILE"
+
+echo "total de erros: $erros"
+
+
+
 TOTAL_LINHAS=$(awk 'END {print NR}' "$LOG_FILE")
 TOTAL_ERROS=$(grep -c "ERROR" "$LOG_FILE")
 IP_UNICOS=$(awk '{print $2}' "$LOG_FILE" | sort | uniq | wc -l)
@@ -13,4 +40,3 @@ echo "Total de erros: $TOTAL_ERROS"
 echo "IPs únicos: $IP_UNICOS"
 echo "IP mais frequente: $IP_FREQUENTE"
 echo "Número de downloads: $NUM_DOWNLOADS"
-
