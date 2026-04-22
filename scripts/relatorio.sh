@@ -11,8 +11,8 @@ fi
 
 echo "ficheiro encontrado"
 
-LOG_FILE="10000.log"
-erros=0
+
+errors=0
 
 while read line
 do
@@ -23,8 +23,49 @@ do
   fi
 done < "$LOG_FILE"
 
-echo "total de erros: $erros"
+echo "total de erros: $errors"
 
+
+while true
+do
+  echo ""
+  echo "MENU"
+  echo "1- Total linhas"
+  echo "2- Total erros"
+  echo "3- IPs únicos"
+  echo "4- Top IP"
+  echo "5- Dowlands"
+  echo "6- sair"
+
+  read option
+  case $option in
+    1)
+      wc -l "$LOG_FILE"
+      ;;
+    2)
+      grep ERROR "$LOG_FILE" | wc -l
+      ;;
+    3)
+       cut -d "" -f2 "$LOG_FILE" | sort | uniq | wc -l
+
+   4) 
+      cut -d "" -f2 "$lLOG_FILE" | sort | unique -c | sort -nr | head -n1
+      ;;
+
+    5) 
+      grep DOWNLOAD "$LOG_FILE" | wc -l
+      ;;
+
+    6) 
+      exit 0
+      ;;
+    
+    *)
+      echo "opcao invalida"
+      ;;
+
+  esac
+done
 
 
 TOTAL_LINHAS=$(awk 'END {print NR}' "$LOG_FILE")
