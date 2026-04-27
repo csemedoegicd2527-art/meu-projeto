@@ -1,0 +1,7 @@
+Relatório do Log:
+----------------
+Total de linhas: 10000
+Total de erros: 1662
+IPs únicos: 58
+IP mais frequente: 192.168.1.10
+Número de downloads: 1726
