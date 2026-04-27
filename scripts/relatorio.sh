@@ -9,8 +9,8 @@ if [ ! -f "$LOG_FILE" ]; then
 fi
 echo "ficheiro encontrado"
 
-#errors=$(grep -c "ERROR" "$LOG_FILE")
-#echo "total de erros: $errors"
+errors=$(grep -c "ERROR" "$LOG_FILE")
+echo "total de erros: $errors"
 
 
 while true
@@ -28,6 +28,7 @@ do
   
   read option
   
+
   case $option in 
    1) 
      wc -l "$LOG_FILE" 
